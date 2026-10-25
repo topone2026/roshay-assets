@@ -1,0 +1,128 @@
+#rxHero{
+  --cream:#F8F6F1;
+  --cream-soft:#F1EDE3;
+  --gold:#C9A24B;
+  --gold-dark:#B8860B;
+  --maroon:#8B1E23;
+  --maroon-deep:#6E1418;
+  --green:#1F3B2C;
+  --green-deep:#152A1F;
+  --ink:#1A1A1A;
+  --ink-soft:#4A453C;
+  --line:rgba(201,162,75,.35);
+  --line-soft:rgba(26,26,26,.08);
+  --shadow-1:0 10px 30px rgba(21,42,31,.10);
+  --shadow-2:0 24px 60px rgba(21,42,31,.18);
+  --r-sm:10px; --r-md:18px; --r-lg:28px;
+  --container:1200px;
+  --ease:cubic-bezier(.22,.61,.2,1);
+  --font-head:'Cairo', sans-serif;
+  --font-body:'Cairo', sans-serif;
+  --font-latin:'Cormorant Garamond', serif;
+}
+#rxHero,#rxHero *,#rxHero *::before,#rxHero *::after{box-sizing:border-box}.rx-container{max-width:var(--container);margin-inline:auto;padding-inline:clamp(20px,4vw,48px)}
+/* ===== Hero / Slider ===== */
+.rx-hero{position:relative;min-height:calc(100svh - 74px);overflow:hidden;background:var(--green-deep)}
+.rx-slide{
+  position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1s var(--ease), visibility 1s;
+  display:block;
+}
+.rx-slide.rx-active{opacity:1;visibility:visible;z-index:2}
+.rx-slide-bg{position:absolute;inset:0;z-index:0}
+.rx-slide-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.06)}
+.rx-slide.rx-active .rx-slide-bg img{animation:rxKenburns 9s var(--ease) forwards}
+.rx-slide-bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to left, rgba(21,42,31,.72) 0%, rgba(21,42,31,.25) 45%, rgba(21,42,31,0) 70%);
+}
+.rx-slide--maroon .rx-slide-bg::after{background:linear-gradient(to left, rgba(42,8,10,.75) 0%, rgba(42,8,10,.28) 45%, rgba(42,8,10,0) 70%)}
+.rx-slide--cream .rx-slide-bg::after{background:linear-gradient(to left, rgba(248,246,241,.88) 0%, rgba(248,246,241,.45) 50%, rgba(248,246,241,0) 75%)}
+.rx-hero-content{position:relative;z-index:3;width:100%;height:100%;display:flex;align-items:center;padding-block:60px}
+.rx-slide-grid{
+  display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(28px,5vw,72px);
+}
+.rx-slide-text,.rx-slide-media{min-width:0}
+/* product arch */
+.rx-slide-media{position:relative;justify-self:center;order:2}
+.rx-arch{
+  width:min(380px,86%);aspect-ratio:4/5.1;border-radius:999px 999px var(--r-lg) var(--r-lg);
+  overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-2);position:relative;
+}
+.rx-arch::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 60px rgba(21,42,31,.25);border-radius:inherit;pointer-events:none}
+.rx-arch img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+.rx-product-chip{
+  position:absolute;bottom:22px;right:-14px;background:rgba(248,246,241,.96);border:1px solid var(--line);
+  border-radius:999px;padding:9px 20px;font-size:13px;font-weight:800;color:var(--green);
+  box-shadow:var(--shadow-1);display:flex;align-items:center;gap:8px;
+}
+.rx-product-chip .rx-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+/* text */
+.rx-slide-text{max-width:560px}
+.rx-kicker{
+  display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.14em;
+  color:var(--gold);margin-bottom:18px;
+}
+.rx-kicker::before{content:"";width:38px;height:1px;background:var(--gold)}
+.rx-slide-title{font-size:clamp(38px,5.6vw,68px);color:var(--cream);line-height:1.28;margin-bottom:8px}
+.rx-slide-title .rx-accent{color:var(--gold)}
+.rx-slide-sub{font-size:clamp(15px,1.6vw,18px);color:rgba(248,246,241,.82);font-weight:400;margin-bottom:32px;max-width:46ch}
+.rx-slide--cream .rx-slide-title{color:var(--green)}
+.rx-slide--cream .rx-slide-sub{color:var(--ink-soft)}
+.rx-hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.rx-btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;
+  padding:0 34px;border-radius:999px;font-size:15px;font-weight:800;transition:all .3s var(--ease);
+}
+.rx-btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;box-shadow:0 10px 26px rgba(184,134,11,.35)}
+.rx-btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(184,134,11,.45)}
+.rx-btn-ghost{border:1.5px solid rgba(248,246,241,.45);color:var(--cream)}
+.rx-btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.rx-slide--cream .rx-btn-ghost{border-color:rgba(26,26,26,.25);color:var(--ink)}
+.rx-slide--cream .rx-btn-ghost:hover{border-color:var(--maroon);color:var(--maroon)}
+/* slider controls */
+.rx-slider-dots{
+  position:absolute;bottom:34px;right:clamp(20px,4vw,48px);z-index:5;display:flex;gap:10px;align-items:center;
+}
+.rx-dot-btn{width:34px;height:4px;border-radius:2px;background:rgba(248,246,241,.3);transition:all .35s}
+.rx-dot-btn.rx-active{background:var(--gold);width:52px}
+.rx-slider-arrows{position:absolute;bottom:24px;left:clamp(20px,4vw,48px);z-index:5;display:flex;gap:10px}
+.rx-arrow-btn{
+  width:48px;height:48px;border-radius:50%;border:1px solid rgba(248,246,241,.35);color:var(--cream);
+  display:grid;place-items:center;transition:all .3s;backdrop-filter:blur(4px);
+}
+.rx-arrow-btn:hover{background:var(--gold);border-color:var(--gold);color:#fff}
+.rx-slide-counter{
+  position:absolute;top:38px;left:clamp(20px,4vw,48px);z-index:5;color:rgba(248,246,241,.75);
+  font-size:13px;letter-spacing:.2em;display:flex;align-items:center;gap:10px;
+}
+.rx-slide-counter::after{content:"";width:44px;height:1px;background:rgba(248,246,241,.4)}
+.rx-scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:5;color:rgba(248,246,241,.6);
+  font-size:11px;letter-spacing:.3em;display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.rx-scroll-hint::after{content:"";width:1px;height:34px;background:linear-gradient(to bottom,var(--gold),transparent);animation:hint 2s infinite}
+.rx-section-title .rx-accent{color:var(--gold-dark)}
+.rx-story-media .rx-arch{width:min(420px,100%);border-color:rgba(201,162,75,.45)}
+.rx-story .rx-kicker{color:var(--gold)}
+.rx-story-title .rx-accent{color:var(--gold)}
+@media (max-width:860px){/* Hero: product on top, text below — full compatibility.
+     Static slides (natural height) — no absolute stacking, no flex sizing traps */
+  .rx-hero{min-height:auto}
+.rx-slide{position:relative;inset:auto;display:none}
+.rx-slide.rx-active{display:block;animation:slideFade .6s var(--ease)}
+.rx-hero-content{display:block;height:auto;padding-block:20px 88px}
+.rx-slide-grid{grid-template-columns:1fr;gap:22px}
+.rx-slide-media{order:-1;justify-self:center;width:100%;min-width:0;display:flex;justify-content:center}
+.rx-arch{width:min(320px,100%);aspect-ratio:4/4.6}
+.rx-product-chip{right:8px;bottom:14px;font-size:12px;padding:7px 16px}
+.rx-slide-text{max-width:100%;text-align:right}
+.rx-slide-title{font-size:clamp(30px,8.4vw,42px)}
+.rx-slide-sub{font-size:14.5px;margin-bottom:22px}
+.rx-btn{min-height:48px;padding:0 26px;font-size:14px}
+.rx-scroll-hint{display:none}
+.rx-slide-counter{top:20px;left:20px;font-size:11px}
+.rx-slider-dots{bottom:26px;right:20px}
+.rx-slider-arrows{bottom:16px;left:16px}
+.rx-arrow-btn{width:44px;height:44px}}
+@media (max-width:400px){.rx-arch{width:min(280px,100%)}
+.rx-slide-title{font-size:28px}}#rxHero{max-width:100vw;overflow:hidden}
